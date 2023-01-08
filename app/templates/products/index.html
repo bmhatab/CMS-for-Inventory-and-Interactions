@@ -13,9 +13,8 @@
     <li>{{ product.name }}</li>
     <li>{{ product.quantity }}</li>
     <li>{{ product.price }}</li>
-    <a class="btn btn-outline-secondary" href="#">Edit Profile</a>
-    <a class="btn btn-outline-secondary" href="#">Delete Profile</a>
-    <a class="btn btn-outline-secondary" href="#">Add Interaction</a>
+    <a class="btn btn-outline-secondary" href="{{url_for('main.edit_product', product_id=product.id)}}">Edit</a>
+    <a class="btn btn-outline-secondary" href="{{url_for('main.delete_product', product_id=product.id)}}">Delete</a>
 
     {% endfor %}
 </ul>

@@ -156,6 +156,31 @@ def list_products():
     products = Product.query.all()
     return render_template('products/index.html', products=products)
 
+@main.route('/edit_product/<int:product_id>', methods=['GET', 'POST'])
+def edit_product(product_id):
+  product = Product.query.get_or_404(product_id)
+  form = ProductForm()
+  if form.validate_on_submit():
+    product.name = form.name.data
+    product.quantity = form.quantity.data
+    product.price = form.price.data
+    db.session.commit()
+    return redirect(url_for('main.list_products'))
+  form.name.data = product.name
+  form.quantity.data = product.quantity
+  form.price.data = product.price
+  return render_template('products/edit_product.html', form=form, product=product,product_id=product_id)
+
+
+@main.route('/products/<int:product_id>/delete/', methods=['GET','POST'])
+def delete_product(product_id):
+    product = Product.query.get(product_id)
+    db.session.delete(product)
+    db.session.commit()
+    flash('Product deleted successfully!')
+    return redirect(url_for('main.list_products'))
+
+#####################################################################################################
 
 
 
