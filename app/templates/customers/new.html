@@ -1,0 +1,16 @@
+{% extends 'base_index.html' %}
+
+
+{% block content %}
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <form method="post" action="{{ url_for('main.create_customer') }}">
+        {{ form.csrf_token }}
+        {{ form.name.label(class="form-label") }} {{ form.name(class="form-control") }}
+        {{ form.email.label(class="form-label") }} {{ form.email(class="form-control") }}
+        {{ form.phone.label(class="form-label") }} {{ form.phone(class="form-control") }}
+        {{ form.address.label(class="form-label") }} {{ form.address(class="form-control") }}
+        {{ form.notes.label(class="form-label") }} {{ form.notes(class="form-control") }}
+        {{ form.submit(class="btn btn-outline secondary") }}
+    </form>
+</div>   
+{% endblock %}

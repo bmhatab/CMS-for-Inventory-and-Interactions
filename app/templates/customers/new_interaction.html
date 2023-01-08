@@ -1,0 +1,25 @@
+{% extends "base_index.html" %}
+
+{% block content %}
+
+<h1>New Interaction</h1>
+<div class="shadow p-3 mb-5 bg-body rounded">
+<form method="POST" action="{{ url_for('main.create_interaction',customer_id=customer_id, form=form) }}">
+  {{ form.csrf_token }}
+  <div class="form-group">
+    {{ form.interaction_type.label }}
+    {{ form.interaction_type(class="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ form.interaction_date.label }}
+    {{ form.interaction_date(class="form-control") }}
+  </div>
+  <div class="form-group">
+    {{ form.notes.label }}
+    {{ form.notes(class="form-control") }}
+  </div>
+  <input type="submit" value="Save" class="btn btn-primary">
+</form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base_index.html" %}
+
+{% block content %}
+
+<h1>Customer Details</h1>
+
+<table>
+  <tr>
+    <td>ID</td>
+    <td>{{ customer.id }}</td>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td>{{ customer.name }}</td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td>{{ customer.email }}</td>
+  </tr>
+</table>
+
+<h2>Interactions</h2>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Note</th>
+  </tr>
+  {% for interaction in interactions %}
+  <tr>
+    <td>{{ interaction.date }}</td>
+    <td>{{ interaction.note }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

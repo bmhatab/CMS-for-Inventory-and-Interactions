@@ -1,0 +1,15 @@
+
+{% extends "base_index.html" %}
+
+{% block content %}
+  <h1>Customer and Interactions</h1>
+
+  {% for customer in customers %}
+    <h2>{{ customer.name }}</h2>
+    <ul>
+      {% for interaction in customer.interactions %}
+        <li>{{ interaction.interaction_date }}: {{ interaction.interaction_type }} - {{ interaction.notes }}</li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+{% endblock %}

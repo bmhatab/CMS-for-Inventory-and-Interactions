@@ -1,0 +1,23 @@
+{% extends 'base_index.html' %}
+
+{% block tile %} Customer List {% endblock %}
+
+{% block content %}
+
+    <!-- templates/customers/index.html -->
+
+<h1>Customers</h1>
+
+<ul>
+  {% for customer in customers %}
+    <li>{{ customer.name }}</li>
+    <a class="btn btn-outline-secondary" href="{{url_for('main.edit_customer',customer_id=customer.id)}}">Edit Profile</a>
+    <a class="btn btn-outline-secondary" href="{{url_for('main.delete_customer',customer_id=customer.id)}}">Delete Profile</a>
+    <a class="btn btn-outline-secondary" href="{{url_for('main.create_interaction', customer_id=customer.id)}}">Add Interaction</a>
+
+
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
