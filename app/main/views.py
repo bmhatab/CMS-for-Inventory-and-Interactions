@@ -182,24 +182,52 @@ def delete_product(product_id):
 
 #####################################################################################################
 
+@main.route('/add_order/<int:product_id>', methods=['GET', 'POST'])
+def add_order(product_id):
+    product = Product.query.get(product_id)
+    if product is None:
+        # You might want to display an error message or redirect the user to a different page if the product is not found
+        pass
+    form = OrderForm()
+    if form.validate_on_submit():
+        customer_name = form.customer_name.data
+        form.product_id.data = product.id
+        quantity = form.quantity.data
+        status = form.status.data
+        new_order = Order(customer_name=customer_name, quantity=quantity, status=status, product_id=product_id)
+        db.session.add(new_order)
+        db.session.commit()
+        return redirect(url_for('main.list_orders'))
+    return render_template('orders/add_order.html', form=form,product_id=product_id,product=product)
 
 
 
+@main.route('/orders/')
+def list_orders():
+    orders = Order.query.all()
+    return render_template('orders/index.html', orders=orders)
 
 
-
-
-
-
-@main.route('/add_order', methods=['GET', 'POST'])
-def add_order():
-  form = OrderForm()
+@main.route('/edit_order/<int:order_id>', methods=['GET', 'POST'])
+def edit_order(order_id):
+  order = Order.query.get_or_404(order_id)
+  form = ProductForm()
   if form.validate_on_submit():
-    customer_name = form.customer_name.data
-    quantity = form.quantity.data
-    status = form.status.data
-    new_order = Order(customer_name=customer_name, quantity=quantity, status=status)
-    db.session.add(new_order)
+    order.name = form.name.data
+    order.quantity = form.quantity.data
+    order.price = form.price.data
     db.session.commit()
-    return redirect(url_for('view_orders'))
-  return render_template('products/add_order.html', form=form)
+    return redirect(url_for('main.list_orders'))
+  form.name.data = order.name
+  form.quantity.data = order.quantity
+  form.price.data = order.price
+  return render_template('orders/edit_order.html', form=form, order=order,order_id=order_id)
+
+
+@main.route('/orders/<int:order_id>/delete/', methods=['GET','POST'])
+def delete_order(order_id):
+    order = Order.query.get(order_id)
+    db.session.delete(order)
+    db.session.commit()
+    flash('Order deleted successfully!')
+    return redirect(url_for('main.list_orders'))

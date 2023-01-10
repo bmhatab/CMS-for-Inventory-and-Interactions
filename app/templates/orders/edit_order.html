@@ -1,6 +1,6 @@
 {% extends 'base_index.html' %}
 
-{% block title %} Add Order {% endblock %}
+{% block title %} Edit product {% endblock %}
 
 
 {% block content %}
@@ -15,19 +15,17 @@
     {% endfor %}
 
   
-        <h1>Add Order </h1> 
+        <h1>Edit Order </h1> 
         <br/>
         <div class="shadow p-3 mb-5 bg-body rounded">
             <form method="post">
                 {{form.hidden_tag()}} <!--This creates our csrf token -->
-                {{form.customer_name.label(class="form-label")}}
-                {{form.customer_name(class="form-control")}}
-                {{form.product_id.label(class="form-label")}}
-                {{form.product_id(class="form-control", value = product_id)}}
+                {{form.name.label(class="form-label")}}
+                {{form.name(class="form-control")}}
                 {{form.quantity.label(class="form-label")}}
                 {{form.quantity(class="form-control")}}
-                {{form.status.label(class="form-label")}}
-                {{form.status(class="form-control")}}
+                {{form.price.label(class="form-label")}}
+                {{form.price(class="form-control")}}
                 <br/>
                 {{form.submit(class="btn btn-primary")}} 
             </form>

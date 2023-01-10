@@ -17,7 +17,8 @@ class InteractionForm(FlaskForm):
     notes = TextAreaField('Notes')
 
 class OrderForm(FlaskForm):
-    customer_name = StringField('Name', validators=[DataRequired()])
-    quantity = IntegerField('Quantity', validators=[DataRequired()])
-    status = StringField('Price', validators=[DataRequired()])
-    submit = SubmitField('Add product')
+    customer_name = StringField('Customer Name', validators=[DataRequired()])
+    product_id = IntegerField('product_id', validators=[DataRequired()])
+    quantity = IntegerField('Quantity Ordered', validators=[DataRequired()])
+    status = StringField('Status', validators=[DataRequired()])
+    submit = SubmitField('Add Order')

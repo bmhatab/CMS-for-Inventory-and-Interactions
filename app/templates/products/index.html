@@ -13,6 +13,7 @@
     <li>{{ product.name }}</li>
     <li>{{ product.quantity }}</li>
     <li>{{ product.price }}</li>
+    <a class="btn btn-outline-secondary" href="{{url_for('main.add_order', product_id=product.id)}}">Add Order</a>
     <a class="btn btn-outline-secondary" href="{{url_for('main.edit_product', product_id=product.id)}}">Edit</a>
     <a class="btn btn-outline-secondary" href="{{url_for('main.delete_product', product_id=product.id)}}">Delete</a>
 

@@ -1,0 +1,23 @@
+{% extends 'base_index.html' %}
+
+{% block tile %} Customer List {% endblock %}
+
+{% block content %}
+
+    <!-- templates/customers/index.html -->
+
+<h1>Orders</h1>
+
+<ul>
+  {% for order in orders %}
+    <li>{{ order.name }}</li>
+    <li>{{ order.quantity }}</li>
+    <li>{{ order.price }}</li>
+    <a class="btn btn-outline-secondary" href="{{url_for('main.edit_order', order_id=order.id)}}">Edit</a>
+    <a class="btn btn-outline-secondary" href="{{url_for('main.delete_order', order_id=order.id)}}">Delete</a>
+
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
